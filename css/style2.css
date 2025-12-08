@@ -1,0 +1,38 @@
+body{
+    background: linear-gradient(to bottom right, #ffffff, #a8a8a8);
+    /* linear-gradient(to bottom right, #ffffff, #c7c7c7); */
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+.navbar{
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+}
+.card{
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.5);
+    color: #333;
+}
+.btn-primary-custom{
+    background-color: #e6e6e6;
+    border-color: #b6b6b6;
+    transition: all 0.3s;
+}
+.btn-primary-custom:hover{
+    background-color: #e6e6e6;
+    border-color: #b6b6b6;
+}
+.feature-card{
+    transition: transform 0.2s;
+}
+.feature-card:hover{
+    transform: translateY(-5px);
+}
+
+.shadow{
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.5);
+}
+
+.form-control{
+    box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,0.2);
+}

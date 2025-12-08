@@ -1,0 +1,89 @@
+body {
+      background: linear-gradient(to bottom right, #ffffff, #a8a8a8);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.5);
+    }
+    .card-body {
+      padding: 2rem;
+    }
+    .nav-tabs {
+      border-bottom: none;
+    }
+    .nav-tabs .nav-link.active {
+      background-color: #764ba2;
+      color: white;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+    .nav-tabs .nav-link {
+      color: #764ba2;
+      font-weight: 500;
+      margin-right: 0.5rem;
+    }
+    .form-control:focus {
+      border-color: #764ba2;
+      box-shadow: 0 0 0 0.2rem rgba(118,75,162,0.25);
+    }
+    .btn-primary {
+      background-color: #764ba2;
+      border-color: #764ba2;
+    }
+    .btn-primary:hover {
+      background-color: #667eea;
+      border-color: #667eea;
+    }
+    .alert {
+      border-radius: 0.5rem;
+    }
+    .nav-tabs.justify-content-start {
+      justify-content: flex-start !important;
+    }
+    .nav-tabs {
+  border-bottom: none;
+  padding-left: 0;
+}
+
+.nav-tabs .nav-link {
+  color: #764ba2;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  background-color: #f0f0f0; /* pasif sekmeler için açık ton */
+  border: 1px solid transparent;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #764ba2; /* aktif sekme */
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid #764ba2;
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #5e3ea1;
+  color: #fff;
+}
+/* Mobilde kart padding azalt */
+@media (max-width: 700px) {
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  /* Sekmeler mobilde full genişlik */
+  .nav-tabs .nav-item {
+    flex: 1 1 100%;
+    margin-bottom: 0.25rem;
+  }
+  .nav-tabs .nav-link {
+    text-align: center;
+  }
+}
