@@ -52,6 +52,23 @@ if (isset($_GET['delete'])){
     }
 }
 
+if (isset($_POST['update'])){
+    $kitap_id = $_POST["kitap_id"];
+    $isim = $_POST["isim"];
+    $yazar = $_POST["yazar"];
+    $yayin_evi = $_POST["yayin_evi"];
+    $basim_yili = $_POST["basim_yili"];
+    $tur = $_POST["tur"];
+    
+    $stmt = $pdo -> prepare("UPDATE kutuphane.kitaplar SET isim=?, yazar=?, tur=?, basim_yili=?, yayin_evi=?  WHERE kitap_id=?");
+    if ($stmt -> execute([$isim,$yazar,$tur,$basim_yili,$yayin_evi,$kitap_id])){
+        $succes = "Book succesfully update";
+    }
+    else{
+        $error = "Book Failed to update";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -155,24 +172,26 @@ if (isset($_GET['delete'])){
                                 <td>
                                     <div class="d-flex">
                                         <button onclick="return confirm('Are you sure you want to delete this')" class="btn btn-danger w-100" type="submit"><a  href="?delete=<?=$kitap['kitap_id']?>" class="nav-link">Delete</a></button>
-                                        <button class="btn btn-primary w-100" type="submit"><a  href="" class="nav-link">Update</a></button>
-                                        <div class="modal">
+                                        <button class="btn btn-primary w-100" type="submit" data-bs-target="#editModal<?= $kitap['kitap_id']?>" data-bs-toggle="modal">Update</button>
+                                        <div class="modal" id="editModal<?= $kitap['kitap_id']?>">
                                             <div class="modal-dialog">
-                                                <div class="modal-concept">
+                                                <div class="modal-content">
                                                     <form action="" method="POST">
                                                         <div class="modal-header">
-                                                            <h5 class="moda_title">Update Book</h5>
+                                                            <h5 class="modal_title">Update Book</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                         </div>
-                                                        <div class="moda-body">
-                                                            <div class="mb-2"><input type="text" class="form-control" name="isim" value="<?= $kitap['isim'] ?>" required></div>
-                                                            <div class="mb-2"><input type="text" class="form-control" name="yazar" value="<?= $kitap['yazar'] ?>" required></div>
-                                                            <div class="mb-2"><input type="text" class="form-control" name="tur" value="<?= $kitap['tur'] ?>" required></div>
-                                                            <div class="mb-2"><input type="text" class="form-control" name="yayin_evi" value="<?= $kitap['yayin_evi'] ?>" required></div>
-                                                            <div class="mb-2"><input type="text" class="form-control" name="basim_yili" value="<?= $kitap['basim_yili'] ?>" required></div>
-                                                            <div class="moda-footer">
-                                                                <button ></button>
-                                                            </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="kitap_id" value="<?= $kitap['kitap_id'] ?>" required>
+                                                            <input class="mb-2" type="text" class="form-control" name="isim" value="<?= $kitap['isim'] ?>" required>
+                                                            <input class="mb-2" type="text" class="form-control" name="yazar" value="<?= $kitap['yazar'] ?>" required>
+                                                            <input class="mb-2" type="text" class="form-control" name="tur" value="<?= $kitap['tur'] ?>" required>
+                                                            <input class="mb-2" type="text" class="form-control" name="yayin_evi" value="<?= $kitap['yayin_evi'] ?>" required>
+                                                            <input class="mb-2" type="number" class="form-control" name="basim_yili" value="<?= $kitap['basim_yili'] ?>" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-primary w-100" type="submit" name="update">Update</button>
+                                                            <button class="btn btn-secondary w-100" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -205,8 +224,6 @@ if (isset($_GET['delete'])){
             </div>
         </div>
     </div>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
