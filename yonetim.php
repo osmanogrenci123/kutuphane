@@ -30,16 +30,16 @@ if (isset($_POST["isim"])){
     $basim_yili = $_POST["basim_yili"];
     $tur = $_POST["tur"];
 
-    $cmd = $pdo -> prepare("SELECT * FROM kutuphane.kitaplar r WHERE isim = ? AND yazar = ? ");
-    $cmd -> execute([$isim,$yazar]);
+    $stmt = $pdo -> prepare("SELECT * FROM kutuphane.kitaplar r WHERE isim = ? AND yazar = ? ");
+    $stmt -> execute([$isim,$yazar]);
 
-    if ($cmd -> rowCount()>0) {
+    if ($stmt -> rowCount()>0) {
         $error = "<p class = 'text-dark'>This Book or Author is taken</p>";
     }
     else {
-        $cmd = $pdo -> prepare("INSERT INTO kutuphane.kitaplar (isim,yazar,tur,basim_yili,yayin_evi) VALUES(?,?,?,?,?)");
+        $stmt = $pdo -> prepare("INSERT INTO kutuphane.kitaplar (isim,yazar,tur,basim_yili,yayin_evi) VALUES(?,?,?,?,?)");
 
-        if ($cmd -> execute([$isim,$yazar,$tur,$basim_yili,$yayin_evi])){
+        if ($stmt -> execute([$isim,$yazar,$tur,$basim_yili,$yayin_evi])){
             $succes = "$isim has been succesfully added";
         }else{
             $error = "$isim has failed while adding";
