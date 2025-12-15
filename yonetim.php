@@ -23,7 +23,7 @@ $stmt = $pdo -> query("SELECT * FROM kutuphane.kitaplar order by kitap_id desc")
 $kitaplar = $stmt -> fetchAll();
 }
 
-if (isset($_POST["isim"])){
+if (isset($_POST["add"])){
     $isim = $_POST["isim"];
     $yazar = $_POST["yazar"];
     $yayin_evi = $_POST["yayin_evi"];
@@ -72,6 +72,7 @@ if (isset($_POST['update'])){
     $stmt = $pdo -> prepare("UPDATE kutuphane.kitaplar SET isim=?, yazar=?, tur=?, basim_yili=?, yayin_evi=?  WHERE kitap_id=?");
     if ($stmt -> execute([$isim,$yazar,$tur,$basim_yili,$yayin_evi,$kitap_id])){
         $succes = "Book succesfully update";
+        header("Location:yonetim.php");
     }
     else{
         $error = "Book Failed to update";
@@ -137,7 +138,7 @@ if (isset($_POST['update'])){
                         </div>
                     </div>
                         <div class="mb-3">
-                            <button class="btn btn-success w-100" type="submit">Submit</button>
+                            <button class="btn btn-success w-100" type="submit" name = "add">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -181,7 +182,7 @@ if (isset($_POST['update'])){
                                 <td>
                                     <div class="d-flex">
                                         <button onclick="return confirm('Are you sure you want to delete this')" class="btn btn-danger w-100" type="submit"><a  href="?delete=<?=$kitap['kitap_id']?>" class="nav-link">Delete</a></button>
-                                        <button class="btn btn-primary w-100" type="submit" data-bs-target="#editModal<?= $kitap['kitap_id']?>" data-bs-toggle="modal">Update</button>
+                                        <button class="btn btn-primary w-100" data-bs-target="#editModal<?= $kitap['kitap_id']?>" data-bs-toggle="modal">Update</button>
                                         <div class="modal" id="editModal<?= $kitap['kitap_id']?>">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">

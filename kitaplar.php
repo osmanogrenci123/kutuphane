@@ -47,7 +47,7 @@ $kitaplar = $stmt -> fetchAll();
     <div class = "container mt-5">
 
         <h2 class = "text-dark mb-4" >📚 Kitaplar</h2>
-        <form action="get" class="input-group mb-4 search-bar">
+        <form method="GET" class="input-group mb-4 search-bar">
             <input type="text" name="arama" class="form-control" placeholder="Kitap, yazar veya tur ara" 
             value="<?= isset($_GET['arama']) ? htmlspecialchars($_GET['arama']) : '' ?>">
             <button class="btn bg-white" type="submit">Ara</button>
