@@ -10,9 +10,18 @@ if(!isset ($_SESSION['kullanici'])){
     header("location: login.php");
     exit;
 }
-
+$search = '';
+if (isset($_GET['search']))
+{
+$search = trim($_GET['search']);
+$stmt = $pdo -> prepare("SELECT * FROM kutuphane.kitaplar WHERE isim LIKE ? OR yazar LIKE ?  OR tur LIKE ?  OR basim_yili LIKE ?  ORDER BY kitap_id DESC ");
+$stmt -> execute([ "%$search%","%$search%","%$search%","%$search%"]);
+$kitaplar = $stmt -> fetchAll();
+}
+else{
 $stmt = $pdo -> query("SELECT * FROM kutuphane.kitaplar order by kitap_id desc");
 $kitaplar = $stmt -> fetchAll();
+}
 
 if (isset($_POST["isim"])){
     $isim = $_POST["isim"];
@@ -136,9 +145,9 @@ if (isset($_POST['update'])){
             
             <div class="card mb-3">
                 <div class="card-body">
-                    <form action="GET" class = " d-flex">
+                    <form method="GET" class = " d-flex">
                         <input class="form-control me-2" type="text" name="search" placeholder="Search Books and Authors">
-                        <button class="btn btn-primary">Search</button>
+                        <button class="btn btn-primary" >Search</button>
                     </form>
                 </div>
             </div>
